@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue">
+
+    <LinearLayout
+        android:id="@+id/checkBoxGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <CheckBox
+            android:id="@+id/checkBox_numbers"
+            style="@style/CustomCheckBoxStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Numbers"
+            android:textColor="@color/darkblue"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/checkBox_lowercase"
+            style="@style/CustomCheckBoxStyle"
+            android:layout_width="wrap_content"
+            android:textColor="@color/darkblue"
+            android:layout_height="wrap_content"
+            android:text="LowerCase letters" />
+
+        <CheckBox
+            android:id="@+id/checkBox_uppercase"
+            style="@style/CustomCheckBoxStyle"
+            android:layout_width="wrap_content"
+            android:textColor="@color/darkblue"
+            android:layout_height="wrap_content"
+            android:text="UpperCase letters" />
+
+        <CheckBox
+            android:id="@+id/checkBox_symbols"
+            style="@style/CustomCheckBoxStyle"
+            android:textColor="@color/darkblue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Symbols" />
+
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/seekBar_length"
+        android:layout_width="269dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="30dp"
+        android:max="20"
+        android:progressBackgroundTint="@color/black"
+        android:progressTint="@color/darkblue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxGroup" />
+
+    <EditText
+        android:id="@+id/editText_length"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_edittest"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/darkblue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_length" />
+
+    <EditText
+        android:id="@+id/editText_genPassword"
+        android:layout_width="278dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/round_edittest"
+        android:gravity="center"
+        android:enabled="false"
+        android:hint="* * * * *"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_length" />
+
+    <TextView
+        android:id="@+id/textView_password"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:enabled="false"
+        android:textColor="@color/darkblue"
+        android:text="Password:"
+        app:layout_constraintBottom_toTopOf="@+id/editText_genPassword"
+        app:layout_constraintStart_toStartOf="@+id/editText_genPassword" />
+
+    <Button
+        android:id="@+id/button_generate"
+        style="@style/ButtonStyle"
+        android:layout_width="193dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="50dp"
+        android:text="Generate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_genPassword" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="193dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_round"
+        android:backgroundTint="@color/darkblue"
+        android:text="Save"
+        app:layout_constraintStart_toStartOf="@+id/button_generate"
+        app:layout_constraintTop_toBottomOf="@+id/button_generate" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        style="@style/ButtonStyle"
+        android:layout_width="53dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="10dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_length"
+        app:srcCompat="@drawable/baseline_content_copy_24" />
+
+    <ImageView
+        android:id="@+id/imageView_back"
+        android:layout_width="49dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_arrow_back_ios_new_24" />
+
+    <TextView
+        android:id="@+id/textView_back"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:text="Back"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView_back" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

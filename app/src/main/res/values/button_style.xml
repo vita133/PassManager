@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ButtonStyle">
+    <style name="ButtonStyleMy">
         <item name="android:background">@drawable/button_round</item>
+        <item name="colorPrimary">@color/darkblue</item>
     </style>
 </resources>
+
+

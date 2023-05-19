@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomCheckBoxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:buttonTint">@color/red</item> <!-- Змініть your_desired_color на ваш бажаний колір -->
+        <item name="android:textSize">20dp</item> <!-- Змініть your_desired_size_sp на ваш бажаний розмір в спікселях -->
+        <item name="color">@color/darkblue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>
