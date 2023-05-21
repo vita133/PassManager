@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/blue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView_backsignin"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:text="Back"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView_backsignin" />
+
+    <ImageView
+        android:id="@+id/imageView_backsignin"
+        android:layout_width="49dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_arrow_back_ios_new_24" />
+
+    <TextView
+        android:id="@+id/textView_signin"
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="197dp"
+        android:text="Sign in"
+        android:textColor="@color/darkblue"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextSigninName"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="81dp"
+        android:background="@drawable/round_edittest"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textVisiblePassword"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textColor="@color/darkblue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_signin" />
+
+    <EditText
+        android:id="@+id/editTextSigninPass"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_edittest"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textVisiblePassword"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textColor="@color/darkblue"
+        app:layout_constraintEnd_toEndOf="@+id/editTextSigninName"
+        app:layout_constraintStart_toStartOf="@+id/editTextSigninName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSigninName" />
+
+    <EditText
+        android:id="@+id/editTextSigninConfPass"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_edittest"
+        android:ems="10"
+        android:hint="Confirm password"
+        android:inputType="textVisiblePassword"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textColor="@color/darkblue"
+        app:layout_constraintEnd_toEndOf="@+id/editTextSigninPass"
+        app:layout_constraintStart_toStartOf="@+id/editTextSigninPass"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSigninPass" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:text="Sign in"
+        app:layout_constraintEnd_toEndOf="@+id/editTextSigninConfPass"
+        app:layout_constraintStart_toStartOf="@+id/editTextSigninConfPass"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSigninConfPass" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

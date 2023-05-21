@@ -12,46 +12,78 @@
         android:id="@+id/editTextLoginPass"
         android:layout_width="250dp"
         android:layout_height="50dp"
+        android:background="@drawable/round_edittest"
+        android:ems="10"
+        android:hint="Enter password"
+        android:inputType="textVisiblePassword"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textColor="@color/darkblue"
+        app:layout_constraintEnd_toEndOf="@+id/editTextLoginName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginName"
+        tools:layout_editor_absoluteY="450dp" />
+
+    <EditText
+        android:id="@+id/editTextLoginName"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_marginStart="101dp"
         android:layout_marginEnd="101dp"
         android:background="@drawable/round_edittest"
         android:ems="10"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
+        android:hint="Enter login"
         android:inputType="textVisiblePassword"
         android:maxLines="1"
-        android:hint="@string/enter_password"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textColor="@color/darkblue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.56" />
 
     <Button
         android:id="@+id/buttonLogin"
         style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="140dp"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="232dp"
         android:text="Log in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLoginPass" />
+
+    <Button
+        android:id="@+id/buttonSingIn"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:text="Sign in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
+        app:layout_constraintStart_toStartOf="@+id/buttonLogin" />
 
     <ImageView
         android:id="@+id/passmanager_logoImage"
         android:layout_width="260dp"
         android:layout_height="260dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextLoginPass"
+        android:layout_marginEnd="72dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@mipmap/passmanager_icon_foreground" />
+        app:srcCompat="@mipmap/passmanager_icon_foreground"
+        tools:layout_editor_absoluteY="108dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
