@@ -12,7 +12,7 @@
         android:theme="@style/Theme.PassManager"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.screens.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,18 +21,20 @@
             </intent-filter>
         </activity>
 
-        <!-- Оголошення активності LoginActivity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".login.screens.MainActivity"
             android:exported="true">
         </activity>
 
-        <!-- Оголошення активності SignUpActivity -->
         <activity
-            android:name=".SignupActivity"
+            android:name=".login.screens.SignupActivity"
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".login.screens.GenerationActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

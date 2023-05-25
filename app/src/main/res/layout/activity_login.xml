@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/blue"
 
-    tools:context=".MainActivity">
+    tools:context=".login.screens.MainActivity">
 
     <EditText
         android:id="@+id/editTextLoginPass"
