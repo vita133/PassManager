@@ -15,12 +15,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
-      - name: Set up JDK 11
+      - name: Set up Java
         uses: actions/setup-java@v2
         with:
+          distribution: 'adopt'
           java-version: '11'
-
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
         with:
