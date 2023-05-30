@@ -36,8 +36,8 @@ class SignupActivity : AppCompatActivity() {
             val pass = password.text.toString()
             val repass = repassword.text.toString()
 
-            if (user.isEmpty() || pass.isEmpty() || repass.isEmpty()) {
-                Toast.makeText(this@SignupActivity, "Please enter all the fields", Toast.LENGTH_SHORT).show()
+            if (user.isBlank() || pass.isBlank() || repass.isBlank() || user.contains(" ") || pass.contains(" ") || repass.contains(" ")) {
+                Toast.makeText(this@SignupActivity, "The field cannot be empty or contain spaces", Toast.LENGTH_SHORT).show()
             } else {
                 if (pass == repass) {
                     userViewModel.getUserByUsername(user)
