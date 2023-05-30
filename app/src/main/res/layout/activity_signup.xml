@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView_backsignin"
+        android:id="@+id/textView_backsignup"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,10 +16,10 @@
         android:textColor="@color/white"
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView_backsignin" />
+        app:layout_constraintStart_toEndOf="@+id/imageView_backsignup" />
 
     <ImageView
-        android:id="@+id/imageView_backsignin"
+        android:id="@+id/imageView_backsignup"
         android:layout_width="49dp"
         android:layout_height="53dp"
         android:layout_marginStart="22dp"
@@ -29,20 +29,20 @@
         app:srcCompat="@drawable/baseline_arrow_back_ios_new_24" />
 
     <TextView
-        android:id="@+id/textView_signin"
+        android:id="@+id/textView_signup"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
         android:layout_marginTop="197dp"
-        android:text="Sign in"
+        android:text="Sign up"
         android:textColor="@color/darkblue"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextSigninName"
+        android:id="@+id/editTextSignupName"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginStart="80dp"
@@ -58,10 +58,10 @@
         android:textColor="@color/darkblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_signin" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_signup" />
 
     <EditText
-        android:id="@+id/editTextSigninPass"
+        android:id="@+id/editTextSignupPass"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -73,12 +73,12 @@
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textColor="@color/darkblue"
-        app:layout_constraintEnd_toEndOf="@+id/editTextSigninName"
-        app:layout_constraintStart_toStartOf="@+id/editTextSigninName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSigninName" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextSignupName"
+        app:layout_constraintStart_toStartOf="@+id/editTextSignupName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSignupName" />
 
     <EditText
-        android:id="@+id/editTextSigninConfPass"
+        android:id="@+id/editTextSignupConfPass"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -90,22 +90,22 @@
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textColor="@color/darkblue"
-        app:layout_constraintEnd_toEndOf="@+id/editTextSigninPass"
-        app:layout_constraintStart_toStartOf="@+id/editTextSigninPass"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSigninPass" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextSignupPass"
+        app:layout_constraintStart_toStartOf="@+id/editTextSignupPass"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSignupPass" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonSignup2"
         style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
-        android:text="Sign in"
-        app:layout_constraintEnd_toEndOf="@+id/editTextSigninConfPass"
-        app:layout_constraintStart_toStartOf="@+id/editTextSigninConfPass"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSigninConfPass" />
+        android:text="Sign up"
+        app:layout_constraintEnd_toEndOf="@+id/editTextSignupConfPass"
+        app:layout_constraintStart_toStartOf="@+id/editTextSignupConfPass"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSignupConfPass" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

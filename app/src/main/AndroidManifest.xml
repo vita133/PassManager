@@ -12,13 +12,28 @@
         android:theme="@style/Theme.PassManager"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".login.screens.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".login.screens.MainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".login.screens.SignupActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".login.screens.GenerationActivity"
+            android:exported="true">
         </activity>
     </application>
 
