@@ -44,6 +44,18 @@ class UserRepositoryTest {
         assertEquals(username, user?.userName)
         assertEquals(password, user?.userPassword)
     }
+    
+    @Test
+    fun testInsertUser_ExistingUsername() = runBlocking {
+        val username = "testuser"
+        val password = "testpass"
+        
+        val existingUser = LoginEntity(null, username, "existingpass")
+        userDao.insert(existingUser)
+        userRepository.insertUser(username, password)
+        val user = userDao.getUserByUsername(username)
+        assertEquals("existingpass", user?.userPassword)
+    }
 
     @Test
     fun testGetUserByUsername() = runBlocking {
