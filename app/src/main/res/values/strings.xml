@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">PassManager</string>
     <string name="enter_password">Enter password</string>
+    <string name="enter_password1">Enter password</string>
+    <string name="enter_login">Enter login</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
 </resources>
