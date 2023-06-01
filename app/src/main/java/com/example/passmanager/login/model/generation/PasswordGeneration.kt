@@ -1,11 +1,15 @@
-import com.example.passmanager.login.model.generation.CharacterSet
+package com.example.passmanager.login.model.generation
+
+import PasswordChecker
 import kotlinx.coroutines.runBlocking
 
-class PasswordGenerator(private val length: Int) {
+class PasswordGenerator(
+    private val length: Int,
+    private val passChecker: PasswordChecker
+) {
     init {
         require(length > 0) { "Length should be more than 0" }
     }
-
     private val characterSetsList: MutableList<CharacterSet> = mutableListOf()
 
     fun add(characterSet: CharacterSet) {
@@ -16,10 +20,11 @@ class PasswordGenerator(private val length: Int) {
         characterSetsList.clear()
     }
 
-    fun generatePassword(): String = runBlocking {
+    fun generatePassword(): Pair<String, Boolean> = runBlocking {
         val password: String = generateRandomPassword()
         println("Password generated: $password")
-        return@runBlocking password
+        val isCompromised: Boolean = passChecker.isPasswordCompromised(password)
+        return@runBlocking Pair(password, isCompromised)
     }
 
     private fun generateRandomPassword(): String {
@@ -30,4 +35,5 @@ class PasswordGenerator(private val length: Int) {
             .map { allowedChars.random() }
             .joinToString("")
     }
+
 }
