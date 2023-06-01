@@ -21,6 +21,7 @@ class PasswordGenerator(
     }
 
     fun generatePassword(): Pair<String, Boolean> = runBlocking {
+        if(characterSetsList.isEmpty()) {return@runBlocking Pair("", true)}
         val password: String = generateRandomPassword()
         println("Password generated: $password")
         val isCompromised: Boolean = passChecker.isPasswordCompromised(password)
