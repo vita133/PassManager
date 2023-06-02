@@ -60,6 +60,7 @@
         android:layout_height="28dp"
         android:layout_marginStart="71dp"
         android:layout_marginTop="30dp"
+        android:min="4"
         android:max="20"
         android:progressBackgroundTint="@color/black"
         android:progressTint="@color/darkblue"
@@ -75,7 +76,7 @@
         android:background="@drawable/round_edittest"
         android:enabled="false"
         android:gravity="center"
-        android:text="0"
+        android:text="4"
         android:textColor="@color/darkblue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBar_length" />
@@ -89,6 +90,7 @@
         android:background="@drawable/round_edittest"
         android:gravity="center"
         android:enabled="false"
+        android:textColor="@color/darkblue"
         android:hint="* * * * *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_length" />
@@ -161,6 +163,18 @@
         android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView_back" />
+
+    <TextView
+        android:id="@+id/textView_compromised"
+        style="@style/TextStyle"
+        android:layout_width="264dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Null"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_genPassword" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
