@@ -16,15 +16,15 @@ import kotlinx.coroutines.*
 class GenerationActivity : AppCompatActivity() {
 
     private lateinit var back: TextView
-    private lateinit var seekbarLength: SeekBar
-    private lateinit var edittextLength: EditText
-    private lateinit var checkboxNumbers: CheckBox
-    private lateinit var checkboxLowerCaseLetters: CheckBox
-    private lateinit var checkboxUpperCaseLetters: CheckBox
-    private lateinit var checkboxSymbols: CheckBox
+    private lateinit var seekBarLength: SeekBar
+    private lateinit var editTextLength: EditText
+    private lateinit var checkBoxNumbers: CheckBox
+    private lateinit var checkBoxLowerCaseLetters: CheckBox
+    private lateinit var checkBoxUpperCaseLetters: CheckBox
+    private lateinit var checkBoxSymbols: CheckBox
     private lateinit var buttonGenerate: Button
-    private lateinit var edittextPassword: EditText
-    private lateinit var textviewCompromised: TextView
+    private lateinit var editTextPassword: EditText
+    private lateinit var textViewCompromised: TextView
 
     private var passwordLength = 4
     private val colorGreen by lazy { ContextCompat.getColor(this, R.color.green) }
@@ -33,15 +33,15 @@ class GenerationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_generation)
 
         back = findViewById(R.id.textView_back)
-        seekbarLength = findViewById(R.id.seekBar_length)
-        edittextLength = findViewById(R.id.editText_length)
-        checkboxNumbers = findViewById(R.id.checkBox_numbers)
-        checkboxLowerCaseLetters = findViewById(R.id.checkBox_lowercase)
-        checkboxUpperCaseLetters = findViewById(R.id.checkBox_uppercase)
-        checkboxSymbols = findViewById(R.id.checkBox_symbols)
+        seekBarLength = findViewById(R.id.seekBar_length)
+        editTextLength = findViewById(R.id.editText_length)
+        checkBoxNumbers = findViewById(R.id.checkBox_numbers)
+        checkBoxLowerCaseLetters = findViewById(R.id.checkBox_lowercase)
+        checkBoxUpperCaseLetters = findViewById(R.id.checkBox_uppercase)
+        checkBoxSymbols = findViewById(R.id.checkBox_symbols)
         buttonGenerate = findViewById(R.id.button_generate)
-        edittextPassword = findViewById(R.id.editText_genPassword)
-        textviewCompromised = findViewById(R.id.textView_compromised)
+        editTextPassword = findViewById(R.id.editText_genPassword)
+        textViewCompromised = findViewById(R.id.textView_compromised)
 
         setupSeekBar()
         setupGenerateButton()
@@ -56,14 +56,14 @@ class GenerationActivity : AppCompatActivity() {
 
             passwordGenerator.clear()
 
-            if (!checkboxLowerCaseLetters.isChecked && !checkboxUpperCaseLetters.isChecked && !checkboxSymbols.isChecked) {
-                checkboxNumbers.isChecked = true
+            if (!checkBoxLowerCaseLetters.isChecked && !checkBoxUpperCaseLetters.isChecked && !checkBoxSymbols.isChecked) {
+                checkBoxNumbers.isChecked = true
             }
 
-            if (checkboxNumbers.isChecked){passwordGenerator.add(Numbers())}
-            if ( checkboxLowerCaseLetters.isChecked){passwordGenerator.add(UpperCaseLetters())}
-            if (checkboxUpperCaseLetters.isChecked){passwordGenerator.add(LowerCaseLetters())}
-            if (checkboxSymbols.isChecked){passwordGenerator.add(Symbols())}
+            if (checkBoxNumbers.isChecked){passwordGenerator.add(Numbers())}
+            if (checkBoxLowerCaseLetters.isChecked){passwordGenerator.add(UpperCaseLetters())}
+            if (checkBoxUpperCaseLetters.isChecked){passwordGenerator.add(LowerCaseLetters())}
+            if (checkBoxSymbols.isChecked){passwordGenerator.add(Symbols())}
 
             GlobalScope.launch {
                 val (passwordRes: String, isCompromised: Boolean) = passwordGenerator.generatePassword()
@@ -71,27 +71,27 @@ class GenerationActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     println("Згенерований пароль: $passwordRes")
 
-                    edittextPassword.setText(passwordRes)
-                    textviewCompromised.visibility = View.VISIBLE
+                    editTextPassword.setText(passwordRes)
+                    textViewCompromised.visibility = View.VISIBLE
 
                     if (!isCompromised) {
                         println("Password is secure")
-                        textviewCompromised.text = "Password is secure"
-                        textviewCompromised.setTextColor(colorGreen)
+                        textViewCompromised.text = "Password is secure"
+                        textViewCompromised.setTextColor(colorGreen)
                     } else {
                         println("Password is insecure")
-                        textviewCompromised.text = "Password is insecure"
-                        textviewCompromised.setTextColor(Color.RED)
+                        textViewCompromised.text = "Password is insecure"
+                        textViewCompromised.setTextColor(Color.RED)
                     }
                 }
             }
         }
     }
     private fun setupSeekBar() {
-        seekbarLength.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        seekBarLength.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 passwordLength = progress
-                edittextLength.setText(progress.toString())
+                editTextLength.setText(progress.toString())
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
