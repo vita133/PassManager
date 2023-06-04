@@ -7,6 +7,7 @@ import com.example.passmanager.login.model.UserRepository
 import com.example.passmanager.login.model.database.LoginDB
 import com.example.passmanager.login.model.database.LoginDao
 import com.example.passmanager.login.model.entities.LoginEntity
+import com.example.passmanager.login.util.HashUtils
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -40,52 +41,66 @@ class UserRepositoryTest {
         val password = "testpass"
         userRepository.insertUser(username, password)
 
-        val user = userDao.getUserByUsername(username)
-        assertEquals(username, user?.userName)
-        assertEquals(password, user?.userPassword)
+        val hashedUsername = HashUtils.sha256Hash(username)
+        val user = userDao.getUserByUsername(hashedUsername)
+        val hashedPass = HashUtils.sha256Hash(password + user?.userPasswordSalt)
+        assertEquals(hashedUsername, user?.userName)
+        assertEquals(hashedPass, user?.userPasswordHash)
     }
     
     @Test
     fun testInsertUser_ExistingUsername() = runBlocking {
         val username = "testuser"
         val password = "testpass"
-        
-        val existingUser = LoginEntity(null, username, "existingpass")
+
+        val hashedUsername = HashUtils.sha256Hash(username)
+        val existingUser = LoginEntity(null, hashedUsername, "existingpass", "")
         userDao.insert(existingUser)
         userRepository.insertUser(username, password)
-        val user = userDao.getUserByUsername(username)
-        assertEquals("existingpass", user?.userPassword)
+        val user = userDao.getUserByUsername(hashedUsername)
+        assertEquals("existingpass", user?.userPasswordHash)
     }
 
     @Test
     fun testGetUserByUsername() = runBlocking {
         val username = "testuser"
         val password = "testpass"
-        val user = LoginEntity(null, username, password)
+
+        val salt = HashUtils.generateSalt()
+        val hashedPass = HashUtils.sha256Hash(password + salt)
+        val hashedUsername = HashUtils.sha256Hash(username)
+        val user = LoginEntity(null, hashedUsername, hashedPass, salt)
         userDao.insert(user)
 
         val retrievedUser = userRepository.getUserByUsername(username)
-        assertEquals(username, retrievedUser?.userName)
-        assertEquals(password, retrievedUser?.userPassword)
+        assertEquals(hashedUsername, retrievedUser?.userName)
+        assertEquals(hashedPass, retrievedUser?.userPasswordHash)
     }
 
     @Test
     fun testGetUserByUsernameAndPassword() = runBlocking {
         val username = "testuser"
         val password = "testpass"
-        val user = LoginEntity(null, username, password)
+
+        val salt = HashUtils.generateSalt()
+        val hashedPass = HashUtils.sha256Hash(password + salt)
+        val hashedUsername = HashUtils.sha256Hash(username)
+        val user = LoginEntity(null, hashedUsername, hashedPass, salt)
         userDao.insert(user)
 
         val retrievedUser = userRepository.getUserByUsernameAndPassword(username, password)
-        assertEquals(username, retrievedUser?.userName)
-        assertEquals(password, retrievedUser?.userPassword)
+        assertEquals(hashedUsername, retrievedUser?.userName)
+        assertEquals(hashedPass, retrievedUser?.userPasswordHash)
     }
 
     @Test
     fun testGetUserByUsernameAndPassword_IncorrectPassword() = runBlocking {
         val username = "testuser"
         val password = "testpass"
-        val user = LoginEntity(null, username, password)
+        val salt = HashUtils.generateSalt()
+        val hashedPass = HashUtils.sha256Hash(password + salt)
+        val hashedUsername = HashUtils.sha256Hash(username)
+        val user = LoginEntity(null, hashedUsername, hashedPass, salt)
         userDao.insert(user)
 
         val retrievedUser = userRepository.getUserByUsernameAndPassword(username, "incorrect")
