@@ -7,9 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.passmanager.R
-import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var username: EditText
@@ -35,9 +33,7 @@ class LoginActivity : AppCompatActivity() {
             if (user.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this@LoginActivity, "Please enter all the fields", Toast.LENGTH_SHORT).show()
             } else {
-                lifecycleScope.launch {
                     userViewModel.getUserByUsernameAndPassword(user, pass)
-                }
                 userViewModel.userByUsernameAndPasswordResult.observe(this@LoginActivity) { loggedInUser ->
                     if (loggedInUser != null) {
                         Toast.makeText(this@LoginActivity, "Sign in successful", Toast.LENGTH_SHORT).show()
