@@ -1,6 +1,9 @@
 package com.example.passmanager.login.screens
 
 import PasswordChecker
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -25,6 +28,7 @@ class GenerationActivity : AppCompatActivity() {
     private lateinit var buttonGenerate: Button
     private lateinit var editTextPassword: EditText
     private lateinit var textViewCompromised: TextView
+    private lateinit var copyButton: ImageView
 
     private var passwordLength = 4
     private val colorGreen by lazy { ContextCompat.getColor(this, R.color.green) }
@@ -42,10 +46,12 @@ class GenerationActivity : AppCompatActivity() {
         buttonGenerate = findViewById(R.id.button_generate)
         editTextPassword = findViewById(R.id.editText_genPassword)
         textViewCompromised = findViewById(R.id.textView_compromised)
+        copyButton = findViewById(R.id.imageView)
 
         setupSeekBar()
         setupGenerateButton()
         setupBackButton()
+        setupCopyButton()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -69,7 +75,7 @@ class GenerationActivity : AppCompatActivity() {
                 val (passwordRes: String, isCompromised: Boolean) = passwordGenerator.generatePassword()
 
                 withContext(Dispatchers.Main) {
-                    println("Згенерований пароль: $passwordRes")
+                    println("Generated password: $passwordRes")
 
                     editTextPassword.setText(passwordRes)
                     textViewCompromised.visibility = View.VISIBLE
@@ -87,6 +93,7 @@ class GenerationActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun setupSeekBar() {
         seekBarLength.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -103,6 +110,20 @@ class GenerationActivity : AppCompatActivity() {
         back.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun setupCopyButton(){
+        copyButton.setOnClickListener {
+            val textToCopy = editTextPassword.text.toString()
+            if (textToCopy.isNotEmpty()) {
+                val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("Password", textToCopy)
+                clipboardManager.setPrimaryClip(clip)
+                Toast.makeText(this, "Password copied to clipboard $textToCopy", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Password is empty", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
