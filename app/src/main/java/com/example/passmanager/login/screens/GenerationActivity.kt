@@ -50,11 +50,13 @@ class GenerationActivity : AppCompatActivity() {
         textViewCompromised = findViewById(R.id.textView_compromised)
         copyButton = findViewById(R.id.imageView)
 
+        val name = intent.getStringExtra("name")
+
         setupSeekBar()
         setupGenerateButton()
         setupBackButton()
         setupCopyButton()
-        setupSaveButton()
+        setupSaveButton(name)
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -114,12 +116,12 @@ class GenerationActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    private fun setupSaveButton() {
+    private fun setupSaveButton(name:String? ) {
         buttonSave.setOnClickListener {
             val text = editTextPassword.text.toString()
-
             val intent = Intent(this, EditActivity::class.java)
             intent.putExtra("text", text)
+            intent.putExtra("name", name)
             startActivity(intent)
         }
     }
