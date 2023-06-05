@@ -8,19 +8,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.passmanager.R
+import com.example.passmanager.login.screens.VM.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var username: EditText
     private lateinit var password: EditText
     private lateinit var btnlogin: Button
     private lateinit var btnsignup: Button
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         username = findViewById(R.id.editTextLoginName)
         password = findViewById(R.id.editTextLoginPass)
         btnlogin = findViewById(R.id.buttonLogin)
@@ -33,8 +34,8 @@ class LoginActivity : AppCompatActivity() {
             if (user.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this@LoginActivity, "Please enter all the fields", Toast.LENGTH_SHORT).show()
             } else {
-                    userViewModel.getUserByUsernameAndPassword(user, pass)
-                userViewModel.userByUsernameAndPasswordResult.observe(this@LoginActivity) { loggedInUser ->
+                    loginViewModel.getUserByUsernameAndPassword(user, pass)
+                loginViewModel.userByUsernameAndPasswordResult.observe(this@LoginActivity) { loggedInUser ->
                     if (loggedInUser != null) {
                         Toast.makeText(this@LoginActivity, "Sign in successful", Toast.LENGTH_SHORT).show()
                         val intent = Intent(applicationContext, MainActivity::class.java)

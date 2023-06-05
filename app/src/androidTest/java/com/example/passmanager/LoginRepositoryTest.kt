@@ -3,7 +3,7 @@ package com.example.passmanager
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.passmanager.login.model.UserRepository
+import com.example.passmanager.login.model.LoginRepository
 import com.example.passmanager.login.model.database.LoginDB
 import com.example.passmanager.login.model.database.LoginDao
 import com.example.passmanager.login.model.entities.LoginEntity
@@ -17,17 +17,17 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class UserRepositoryTest {
+class LoginRepositoryTest {
     private lateinit var userDao: LoginDao
     private lateinit var userDatabase: LoginDB
-    private lateinit var userRepository: UserRepository
+    private lateinit var loginRepository: LoginRepository
 
     @Before
     fun setup() {
         val context = InstrumentationRegistry.getInstrumentation().context
         userDatabase = Room.inMemoryDatabaseBuilder(context, LoginDB::class.java).build()
         userDao = userDatabase.getDao()
-        userRepository = UserRepository(userDao)
+        loginRepository = LoginRepository(userDao)
     }
 
     @After
@@ -39,7 +39,7 @@ class UserRepositoryTest {
     fun testInsertUser() = runBlocking {
         val username = "testuser"
         val password = "testpass"
-        userRepository.insertUser(username, password)
+        loginRepository.insertUser(username, password)
 
         val hashedUsername = HashUtils.sha256Hash(username)
         val user = userDao.getUserByUsername(hashedUsername)
@@ -56,7 +56,7 @@ class UserRepositoryTest {
         val hashedUsername = HashUtils.sha256Hash(username)
         val existingUser = LoginEntity(null, hashedUsername, "existingpass", "")
         userDao.insert(existingUser)
-        userRepository.insertUser(username, password)
+        loginRepository.insertUser(username, password)
         val user = userDao.getUserByUsername(hashedUsername)
         assertEquals("existingpass", user?.userPasswordHash)
     }
@@ -72,7 +72,7 @@ class UserRepositoryTest {
         val user = LoginEntity(null, hashedUsername, hashedPass, salt)
         userDao.insert(user)
 
-        val retrievedUser = userRepository.getUserByUsername(username)
+        val retrievedUser = loginRepository.getUserByUsername(username)
         assertEquals(hashedUsername, retrievedUser?.userName)
         assertEquals(hashedPass, retrievedUser?.userPasswordHash)
     }
@@ -88,7 +88,7 @@ class UserRepositoryTest {
         val user = LoginEntity(null, hashedUsername, hashedPass, salt)
         userDao.insert(user)
 
-        val retrievedUser = userRepository.getUserByUsernameAndPassword(username, password)
+        val retrievedUser = loginRepository.getUserByUsernameAndPassword(username, password)
         assertEquals(hashedUsername, retrievedUser?.userName)
         assertEquals(hashedPass, retrievedUser?.userPasswordHash)
     }
@@ -103,7 +103,7 @@ class UserRepositoryTest {
         val user = LoginEntity(null, hashedUsername, hashedPass, salt)
         userDao.insert(user)
 
-        val retrievedUser = userRepository.getUserByUsernameAndPassword(username, "incorrect")
+        val retrievedUser = loginRepository.getUserByUsernameAndPassword(username, "incorrect")
         assertNull(retrievedUser)
     }
 }

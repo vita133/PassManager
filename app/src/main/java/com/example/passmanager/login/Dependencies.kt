@@ -3,7 +3,7 @@ package com.example.passmanager.login
 import android.content.Context
 import androidx.room.Room
 import com.example.passmanager.login.model.database.LoginDB
-import com.example.passmanager.login.model.UserRepository
+import com.example.passmanager.login.model.LoginRepository
 
 
 object Dependencies {
@@ -20,5 +20,5 @@ object Dependencies {
             .build()
     }
 
-    val UserRepository: UserRepository by lazy { UserRepository(db.getDao()) }
+    val LoginRepository: LoginRepository by lazy { LoginRepository(db.getDao()) }
 }
