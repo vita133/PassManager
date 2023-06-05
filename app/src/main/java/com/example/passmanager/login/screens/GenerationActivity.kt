@@ -26,6 +26,7 @@ class GenerationActivity : AppCompatActivity() {
     private lateinit var checkBoxUpperCaseLetters: CheckBox
     private lateinit var checkBoxSymbols: CheckBox
     private lateinit var buttonGenerate: Button
+    private lateinit var buttonSave: Button
     private lateinit var editTextPassword: EditText
     private lateinit var textViewCompromised: TextView
     private lateinit var copyButton: ImageView
@@ -44,6 +45,7 @@ class GenerationActivity : AppCompatActivity() {
         checkBoxUpperCaseLetters = findViewById(R.id.checkBox_uppercase)
         checkBoxSymbols = findViewById(R.id.checkBox_symbols)
         buttonGenerate = findViewById(R.id.button_generate)
+        buttonSave = findViewById(R.id.button_save)
         editTextPassword = findViewById(R.id.editText_genPassword)
         textViewCompromised = findViewById(R.id.textView_compromised)
         copyButton = findViewById(R.id.imageView)
@@ -52,6 +54,7 @@ class GenerationActivity : AppCompatActivity() {
         setupGenerateButton()
         setupBackButton()
         setupCopyButton()
+        setupSaveButton()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -73,7 +76,6 @@ class GenerationActivity : AppCompatActivity() {
 
             GlobalScope.launch {
                 val (passwordRes: String, isCompromised: Boolean) = passwordGenerator.generatePassword()
-
                 withContext(Dispatchers.Main) {
                     println("Generated password: $passwordRes")
 
@@ -109,6 +111,15 @@ class GenerationActivity : AppCompatActivity() {
     private fun setupBackButton() {
         back.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
+    private fun setupSaveButton() {
+        buttonSave.setOnClickListener {
+            val text = editTextPassword.text.toString()
+
+            val intent = Intent(this, EditActivity::class.java)
+            intent.putExtra("text", text)
             startActivity(intent)
         }
     }
