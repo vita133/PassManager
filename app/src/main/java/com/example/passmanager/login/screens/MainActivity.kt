@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.passmanager.R
 import com.example.passmanager.login.screens.VM.PasswordViewModel
+import com.example.passmanager.login.util.PasswordAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -15,11 +18,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        passwordViewModel = ViewModelProvider(this)[PasswordViewModel::class.java]
+
         addPass = findViewById(R.id.flActionButton_addPasswd)
 
-        val name = intent.getStringExtra("name")
+        val name = intent.getStringExtra("name").toString()
 
+        val recyclerView: RecyclerView = findViewById(R.id.passwdRecyclerView)
+
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+
+        val adapter = PasswordAdapter(emptyList())
+        recyclerView.adapter = adapter
+
+
+        passwordViewModel = ViewModelProvider(this)[PasswordViewModel::class.java]
+        passwordViewModel.getAllPasswords(name)
+        passwordViewModel.allPasswordsResult.observe(this@MainActivity) { passwords ->
+            adapter.updatePasswords(passwords)
+        }
 
 
 
