@@ -10,6 +10,10 @@ data class LoginEntity (
     var id: Int? = null,
     @ColumnInfo(name = "UserName")
     var userName: String,
-    @ColumnInfo(name = "UserPassword")
-    var userPassword: String,
+//    @ColumnInfo(name = "UserPassword")
+//    var userPassword: String,
+    @ColumnInfo(name = "UserPasswordHash")
+    var userPasswordHash: String,
+    @ColumnInfo(name = "UserPasswordSalt")
+    var userPasswordSalt: String
 )

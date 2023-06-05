@@ -12,6 +12,6 @@ interface LoginDao {
     fun insert(item: LoginEntity)
     @Query("SELECT * FROM Users WHERE UserName = :username")
     fun getUserByUsername(username: String): LoginEntity?
-    @Query("SELECT * FROM Users WHERE UserName = :username AND UserPassword = :password")
+    @Query("SELECT * FROM Users WHERE UserName = :username AND UserPasswordHash = :password")
     fun getUserByUsernameAndPassword(username: String, password: String): LoginEntity?
 }

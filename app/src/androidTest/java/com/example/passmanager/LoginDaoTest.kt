@@ -34,21 +34,21 @@ class LoginDaoTest {
 
     @Test
     fun insertAndGetUserByUsername() = runBlocking {
-        val user = LoginEntity(userName = "john_doe", userPassword = "password")
+        val user = LoginEntity(userName = "john_doe", userPasswordHash = "password", userPasswordSalt = "")
         loginDao.insert(user)
 
         val fetchedUser = loginDao.getUserByUsername("john_doe")
         assert(fetchedUser?.userName == user.userName)
-        assert(fetchedUser?.userPassword == user.userPassword)
+        assert(fetchedUser?.userPasswordHash == user.userPasswordHash)
     }
 
     @Test
     fun getUserByUsernameAndPassword() = runBlocking {
-        val user = LoginEntity(userName = "john_doe", userPassword = "password")
+        val user = LoginEntity(userName = "john_doe", userPasswordHash = "password", userPasswordSalt = "")
         loginDao.insert(user)
 
         val fetchedUser = loginDao.getUserByUsernameAndPassword("john_doe", "password")
         assert(fetchedUser?.userName == user.userName)
-        assert(fetchedUser?.userPassword == user.userPassword)
+        assert(fetchedUser?.userPasswordHash == user.userPasswordHash)
     }
 }
