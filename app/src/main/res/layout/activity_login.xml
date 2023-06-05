@@ -16,7 +16,7 @@
         android:background="@drawable/round_edittest"
         android:ems="10"
         android:hint="@string/enter_password1"
-        android:inputType="textVisiblePassword"
+        android:inputType="textPassword"
         android:maxLines="1"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
