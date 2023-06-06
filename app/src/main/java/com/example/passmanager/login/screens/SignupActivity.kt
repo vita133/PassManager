@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.passmanager.R
+import com.example.passmanager.login.screens.VM.LoginViewModel
 
 class SignupActivity : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var repassword: EditText
     private lateinit var signup: Button
     private lateinit var back: TextView
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +30,7 @@ class SignupActivity : AppCompatActivity() {
         repassword = findViewById(R.id.editTextSignupConfPass)
         signup = findViewById(R.id.buttonSignup2)
         back = findViewById(R.id.textView_backsignup)
-        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         signup.setOnClickListener {
             val user = username.text.toString()
@@ -40,10 +41,10 @@ class SignupActivity : AppCompatActivity() {
                 Toast.makeText(this@SignupActivity, "The field cannot be empty or contain spaces", Toast.LENGTH_SHORT).show()
             } else {
                 if (pass == repass) {
-                    userViewModel.getUserByUsername(user)
-                    userViewModel.userByUsernameResult.observe(this@SignupActivity) { loggedInUser ->
+                    loginViewModel.getUserByUsername(user)
+                    loginViewModel.userByUsernameResult.observe(this@SignupActivity) { loggedInUser ->
                         if (loggedInUser == null) {
-                            userViewModel.insertUser(user, pass)
+                            loginViewModel.insertUser(user, pass)
                             Toast.makeText(
                                 this@SignupActivity,
                                 "Registered successfully",
@@ -52,6 +53,7 @@ class SignupActivity : AppCompatActivity() {
                             val intent = Intent(applicationContext, MainActivity::class.java).apply {
                                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                             }
+                            intent.putExtra("name", user)
                             startActivity(intent)
                         } else {
                             Toast.makeText(

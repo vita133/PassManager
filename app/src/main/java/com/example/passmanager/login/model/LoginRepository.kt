@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.example.passmanager.login.util.HashUtils
 
-class UserRepository(private val userDao: LoginDao) {
+class LoginRepository(private val userDao: LoginDao) {
     suspend fun insertUser(username: String, password: String) {
         withContext(Dispatchers.IO) {
             val salt = HashUtils.generateSalt()

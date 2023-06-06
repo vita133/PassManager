@@ -37,7 +37,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
@@ -45,18 +44,15 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation 'org.mockito:mockito-core:3.12.4'
     implementation 'androidx.room:room-runtime:2.5.1'
     kapt "androidx.room:room-compiler:2.5.1"
     implementation 'androidx.room:room-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.5'
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
-
-    // define a BOM and its version
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    androidTestImplementation 'org.mockito:mockito-android:3.12.4'
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
-
-    // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1")

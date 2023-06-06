@@ -1,3 +1,6 @@
+package com.example.passmanager
+
+import PasswordChecker
 import com.example.passmanager.login.model.generation.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

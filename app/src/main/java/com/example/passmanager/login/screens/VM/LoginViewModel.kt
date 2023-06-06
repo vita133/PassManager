@@ -1,4 +1,4 @@
-package com.example.passmanager.login.screens
+package com.example.passmanager.login.screens.VM
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,13 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.passmanager.login.model.entities.LoginEntity
-import com.example.passmanager.login.model.UserRepository
+import com.example.passmanager.login.model.LoginRepository
 import com.example.passmanager.login.model.database.LoginDB
 import kotlinx.coroutines.launch
 
 
-class UserViewModel(application: Application) : AndroidViewModel(application) {
-    private val userRepository: UserRepository
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
+    private val loginRepository: LoginRepository
     private val db = LoginDB.getLoginDB(application)
 
     private val _userByUsernameResult = MutableLiveData<LoginEntity?>()
@@ -23,26 +23,26 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         val userDao = db.getDao()
-        userRepository = UserRepository(userDao)
+        loginRepository = LoginRepository(userDao)
     }
 
     fun insertUser(username: String, password: String) {
         viewModelScope.launch {
-            userRepository.insertUser(username, password)
+            loginRepository.insertUser(username, password)
         }
 
     }
 
     fun getUserByUsername(username: String) {
         viewModelScope.launch {
-            val result = userRepository.getUserByUsername(username)
+            val result = loginRepository.getUserByUsername(username)
             _userByUsernameResult.postValue(result)
         }
     }
 
     fun getUserByUsernameAndPassword(username: String, password: String) {
         viewModelScope.launch {
-            val result = userRepository.getUserByUsernameAndPassword(username, password)
+            val result = loginRepository.getUserByUsernameAndPassword(username, password)
             _userByUsernameAndPasswordResult.postValue(result)
         }
     }
