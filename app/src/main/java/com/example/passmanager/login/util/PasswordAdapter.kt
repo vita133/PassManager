@@ -13,7 +13,9 @@ class PasswordAdapter(private val passwords: List<PasswordEntity>) :
     RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
 
     private val passwordsList: MutableList<PasswordEntity> = passwords.toMutableList()
-
+    fun getPasswordsList(): List<PasswordEntity> {
+        return passwordsList
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PasswordViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.passwords_row, parent, false)

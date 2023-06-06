@@ -1,3 +1,6 @@
+package com.example.passmanager
+
+import PasswordChecker
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

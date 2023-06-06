@@ -19,5 +19,4 @@ abstract class PasswordDB : RoomDatabase() {
             ).build()
         }
     }
-
 }
