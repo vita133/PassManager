@@ -50,7 +50,9 @@ class SignupActivity : AppCompatActivity() {
                                 "Registered successfully",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            val intent = Intent(applicationContext, MainActivity::class.java).apply {
+                                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                            }
                             intent.putExtra("name", user)
                             startActivity(intent)
                         } else {
