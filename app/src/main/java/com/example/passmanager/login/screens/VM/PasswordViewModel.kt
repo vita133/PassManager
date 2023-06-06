@@ -44,4 +44,9 @@ class PasswordViewModel (application: Application) : AndroidViewModel(applicatio
             _allPasswordsResult.postValue(result)
         }
     }
+    fun setNull() {
+        viewModelScope.launch {
+            _passwordByNameResult.postValue(null)
+        }
+    }
 }

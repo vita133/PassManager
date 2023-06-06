@@ -49,7 +49,10 @@ class EditActivity : AppCompatActivity() {
                         startActivity(intent)
                     } else {
                         Toast.makeText(this@EditActivity, "You already have password with this name", Toast.LENGTH_SHORT).show()
+                        passwordViewModel.setNull()
                     }
+                    passwordViewModel.passwordByNameResult.removeObservers(this@EditActivity)
+                    passwordName.setText("")
                 }
             }
         }
