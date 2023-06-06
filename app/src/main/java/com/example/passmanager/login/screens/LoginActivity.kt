@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.passmanager.R
+import com.example.passmanager.login.util.SessionManagerUtil
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var username: EditText
@@ -36,6 +38,10 @@ class LoginActivity : AppCompatActivity() {
                 userViewModel.getUserByUsernameAndPassword(user, pass)
                 userViewModel.userByUsernameAndPasswordResult.observe(this@LoginActivity) { loggedInUser ->
                     if (loggedInUser != null) {
+                        val sessionToken = UUID.randomUUID().toString()
+                        SessionManagerUtil.storeUserToken(applicationContext, sessionToken)
+                        val expiresIn = 3600
+                        SessionManagerUtil.startUserSession(applicationContext, expiresIn)
                         Toast.makeText(this@LoginActivity, "Sign in successful", Toast.LENGTH_SHORT).show()
                         val intent = Intent(applicationContext, MainActivity::class.java).apply {
                             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
