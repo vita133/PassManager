@@ -33,12 +33,15 @@ class LoginActivity : AppCompatActivity() {
             if (user.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this@LoginActivity, "Please enter all the fields", Toast.LENGTH_SHORT).show()
             } else {
-                    userViewModel.getUserByUsernameAndPassword(user, pass)
+                userViewModel.getUserByUsernameAndPassword(user, pass)
                 userViewModel.userByUsernameAndPasswordResult.observe(this@LoginActivity) { loggedInUser ->
                     if (loggedInUser != null) {
                         Toast.makeText(this@LoginActivity, "Sign in successful", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        val intent = Intent(applicationContext, MainActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
                         startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
                     }
