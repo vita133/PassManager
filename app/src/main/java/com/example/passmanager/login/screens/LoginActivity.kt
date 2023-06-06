@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
             if (user.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this@LoginActivity, "Please enter all the fields", Toast.LENGTH_SHORT).show()
             } else {
-                    loginViewModel.getUserByUsernameAndPassword(user, pass)
+                loginViewModel.getUserByUsernameAndPassword(user, pass)
                 loginViewModel.userByUsernameAndPasswordResult.observe(this@LoginActivity) { loggedInUser ->
                     if (loggedInUser != null) {
                         Toast.makeText(this@LoginActivity, "Sign in successful", Toast.LENGTH_SHORT).show()

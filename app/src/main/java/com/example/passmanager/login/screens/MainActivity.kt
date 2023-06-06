@@ -25,8 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.passwdRecyclerView)
 
-        val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         val adapter = PasswordAdapter(emptyList())
         recyclerView.adapter = adapter

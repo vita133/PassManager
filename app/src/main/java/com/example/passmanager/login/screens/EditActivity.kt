@@ -29,10 +29,14 @@ class EditActivity : AppCompatActivity() {
         buttonDelete = findViewById(R.id.button_delete)
         passwordName = findViewById(R.id.editText_passName)
 
-        val text = intent.getStringExtra("text")
-        passwordEditText.setText(text)
         val username = intent.getStringExtra("name").toString()
+        val textPassword = intent.getStringExtra("textPassword")
+        passwordEditText.setText(textPassword)
 
+        setupSaveButton(username)
+    }
+
+    private fun setupSaveButton(username:String ) {
         buttonSave.setOnClickListener {
             val passName = passwordName.text.toString()
             val pass = passwordEditText.text.toString()

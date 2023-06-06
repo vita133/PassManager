@@ -120,7 +120,7 @@ class GenerationActivity : AppCompatActivity() {
         buttonSave.setOnClickListener {
             val text = editTextPassword.text.toString()
             val intent = Intent(this, EditActivity::class.java)
-            intent.putExtra("text", text)
+            intent.putExtra("textPassword", text)
             intent.putExtra("name", name)
             startActivity(intent)
         }
