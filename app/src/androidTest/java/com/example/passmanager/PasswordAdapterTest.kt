@@ -14,7 +14,7 @@ class PasswordAdapterTest {
 
     @Test
     fun getItemCount_returnsCorrectItemCount() {
-        val passwords = listOf(
+        var passwords = mutableListOf(
             PasswordEntity(1, "username", "site1", "password1"),
             PasswordEntity(2, "username", "site2", "password2"),
             PasswordEntity(3, "username", "site3", "password3")
@@ -28,12 +28,12 @@ class PasswordAdapterTest {
 
     @Test
     fun updatePasswords_updatesPasswordsListAndNotifiesDataSetChanged() {
-        val passwords1 = listOf(
+        var passwords1 = mutableListOf(
             PasswordEntity(1, "username", "site1", "password1"),
             PasswordEntity(2, "username", "site2", "password2"),
             PasswordEntity(3, "username", "site3", "password3")
         )
-        val passwords2 = listOf(
+        val passwords2 = mutableListOf(
             PasswordEntity(4, "username", "site4", "password4"),
             PasswordEntity(5, "username", "site5", "password5")
         )
