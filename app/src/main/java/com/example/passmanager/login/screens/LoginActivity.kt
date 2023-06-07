@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                         intent.putExtra("name", user)
                         startActivity(intent)
-                        finish()
+                        finishAffinity()
                     } else {
                         Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
                     }

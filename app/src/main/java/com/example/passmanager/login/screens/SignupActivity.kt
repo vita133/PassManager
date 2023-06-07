@@ -88,5 +88,6 @@ class SignupActivity : AppCompatActivity() {
         }
         intent.putExtra("name", user)
         startActivity(intent)
+        finishAffinity()
     }
 }
