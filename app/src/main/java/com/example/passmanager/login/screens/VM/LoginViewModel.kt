@@ -46,4 +46,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             _userByUsernameAndPasswordResult.postValue(result)
         }
     }
+    fun setNull() {
+        viewModelScope.launch {
+            _userByUsernameResult.postValue(null)
+        }
+    }
 }

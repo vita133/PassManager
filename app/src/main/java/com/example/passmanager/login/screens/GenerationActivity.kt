@@ -50,11 +50,11 @@ class GenerationActivity : AppCompatActivity() {
         textViewCompromised = findViewById(R.id.textView_compromised)
         copyButton = findViewById(R.id.imageView)
 
-        val name = intent.getStringExtra("name")
+        val name = intent.getStringExtra("name").toString()
 
         setupSeekBar()
         setupGenerateButton()
-        setupBackButton()
+        setupBackButton(name)
         setupCopyButton()
         setupSaveButton(name)
     }
@@ -110,9 +110,10 @@ class GenerationActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupBackButton() {
+    private fun setupBackButton(name : String) {
         back.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra("name", name)
             startActivity(intent)
         }
     }

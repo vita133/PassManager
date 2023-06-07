@@ -10,7 +10,11 @@ import com.example.passmanager.R
 import com.example.passmanager.login.screens.VM.PasswordViewModel
 import com.example.passmanager.login.util.PasswordAdapter
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
+import com.example.passmanager.login.model.entities.PasswordEntity
 import com.example.passmanager.login.util.SessionManagerUtil
+import com.example.passmanager.login.util.SwipeToDeleteCallback
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
@@ -29,11 +33,13 @@ class MainActivity : AppCompatActivity() {
         val name = intent.getStringExtra("name").toString()
 
         val recyclerView: RecyclerView = findViewById(R.id.passwdRecyclerView)
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        val adapter = PasswordAdapter(emptyList())
+        val adapter = PasswordAdapter(mutableListOf<PasswordEntity>(), name)
+        val itemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+        recyclerView.addItemDecoration(itemDecoration)
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
 
         passwordViewModel = ViewModelProvider(this)[PasswordViewModel::class.java]
@@ -61,16 +67,10 @@ class MainActivity : AppCompatActivity() {
             SessionManagerUtil.endUserSession(applicationContext)
             val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finishAffinity()
         }
 
-    }
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        val isSessionActive = SessionManagerUtil.isSessionActive(Date(), applicationContext)
-        if (isSessionActive) {
-            Toast.makeText(this, "Back button disabled", Toast.LENGTH_SHORT).show()
-        } else {
-            super.onBackPressed()
-        }
     }
 }
