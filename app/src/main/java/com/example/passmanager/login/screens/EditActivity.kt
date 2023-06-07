@@ -50,7 +50,6 @@ class EditActivity : AppCompatActivity() {
                 if(passName.isEmpty() || pass.isEmpty()) {
                     Toast.makeText(this@EditActivity, "Please enter all the fields", Toast.LENGTH_SHORT).show()
                 } else {
-                    passwordViewModel.setUserName(username)
                     passwordViewModel.getPasswordByName(username, passName)
                     passwordViewModel.passwordByNameResult.observe(this@EditActivity){existPass ->
                         if(existPass == null) {

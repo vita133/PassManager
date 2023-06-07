@@ -9,25 +9,24 @@ class PasswordEncryptorTest {
 
     @Before
     fun setup() {
-        val username = "myKey"
-        passwordEncryptor = PasswordEncryptor(username)
+        passwordEncryptor = PasswordEncryptor()
     }
 
     @Test
     fun encryptPassword_returnsValidEncryption() {
         val password = "password123"
 
-        val encryptedPassword = passwordEncryptor.encryptPassword(password)
-        val decryptedPassword = passwordEncryptor.decryptPassword(encryptedPassword)
+        val encryptedPassword = passwordEncryptor.encryptPassword(password,"myKey")
+        val decryptedPassword = passwordEncryptor.decryptPassword(encryptedPassword,"myKey")
 
         assertEquals(password, decryptedPassword)
     }
 
     @Test
     fun decryptPassword_returnsValidDecryption() {
-        val encryptedPassword = "svY77/rN6W5t0H4EuffjBoajuws2fFP70Q9y9ydY8X0="
+        val encryptedPassword = "dFK4c183Yva9xMlAwAn0uQ=="
 
-        val decryptedPassword = passwordEncryptor.decryptPassword(encryptedPassword)
+        val decryptedPassword = passwordEncryptor.decryptPassword(encryptedPassword,"myKey")
         val expectedDecryptedPassword = "password4"
 
         assertEquals(expectedDecryptedPassword, decryptedPassword)

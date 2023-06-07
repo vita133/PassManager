@@ -12,7 +12,7 @@ import com.example.passmanager.login.model.entities.PasswordEntity
 
 class PasswordAdapter(private val passwords: List<PasswordEntity>, private val hashKey: String) :
     RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
-    private val encryptor: PasswordEncryptor = PasswordEncryptor(hashKey)
+    private val encryptor: PasswordEncryptor = PasswordEncryptor()
     private val passwordsList: MutableList<PasswordEntity> = passwords.toMutableList()
     fun getPasswordsList(): List<PasswordEntity> {
         return passwordsList
@@ -32,7 +32,7 @@ class PasswordAdapter(private val passwords: List<PasswordEntity>, private val h
         holder.bind(password)
     }
     private fun decryptPassword(encryptedPassword: String): String {
-        return encryptor.decryptPassword(encryptedPassword)
+        return encryptor.decryptPassword(encryptedPassword, hashKey)
     }
     fun updatePasswords(newPasswords: List<PasswordEntity>) {
         passwordsList.clear()

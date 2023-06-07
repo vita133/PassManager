@@ -24,9 +24,7 @@ class PasswordViewModel (application: Application) : AndroidViewModel(applicatio
         val passDao = db.getDao()
         passRepository = PasswordRepository(passDao)
     }
-    fun setUserName (username: String){
-        passRepository.setUserName(username)
-    }
+
     fun insertPassword(username: String, passname:String, password: String) {
         viewModelScope.launch {
             passRepository.insertPassword(username, passname, password)

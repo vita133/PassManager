@@ -29,15 +29,15 @@ class PasswordAdapterTest {
 
     @Test
     fun updatePasswords_updatesPasswordsListAndNotifiesDataSetChanged() {
-        val encryptor = PasswordEncryptor("myKey")
+        val encryptor = PasswordEncryptor()
         val passwords1 = listOf(
-            PasswordEntity(1,"username", encryptor.encryptPassword("site1"), encryptor.encryptPassword("password1")),
-            PasswordEntity(2,"username", encryptor.encryptPassword("site2"), encryptor.encryptPassword("password2")),
-            PasswordEntity(3,"username", encryptor.encryptPassword("site3"), encryptor.encryptPassword("password3")),
+            PasswordEntity(1,"username", encryptor.encryptPassword("site1","myKey"), encryptor.encryptPassword("password1", "myKey")),
+            PasswordEntity(2,"username", encryptor.encryptPassword("site2","myKey"), encryptor.encryptPassword("password2", "myKey")),
+            PasswordEntity(3,"username", encryptor.encryptPassword("site3","myKey"), encryptor.encryptPassword("password3", "myKey")),
         )
         val passwords2en = listOf(
-            PasswordEntity(4,"username", encryptor.encryptPassword("site4"), encryptor.encryptPassword("password4")),
-            PasswordEntity(5,"username", encryptor.encryptPassword("site5"), encryptor.encryptPassword("password5")),
+            PasswordEntity(4,"username", encryptor.encryptPassword("site4", "myKey"), encryptor.encryptPassword("password4", "myKey")),
+            PasswordEntity(5,"username", encryptor.encryptPassword("site5", "myKey"), encryptor.encryptPassword("password5", "myKey")),
         )
         val passwords2de = listOf(
             PasswordEntity(4, "username", "site4", "password4"),

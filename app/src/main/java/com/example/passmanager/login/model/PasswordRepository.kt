@@ -9,18 +9,13 @@ import kotlinx.coroutines.withContext
 
 class PasswordRepository (private val passDao: PasswordDao) {
 
-    private lateinit var encryptor: PasswordEncryptor
-    private lateinit var userName: String
+    private val encryptor: PasswordEncryptor = PasswordEncryptor()
 
-    fun setUserName (username: String){
-        userName = username
-        encryptor = PasswordEncryptor(userName)
-    }
     suspend fun insertPassword(username: String, passname: String, password: String) {
         withContext(Dispatchers.IO) {
             val hashedUsername = HashUtils.sha256Hash(username)
-            val encryptedPassword = encryptPassword(password)
-            val encryptedPassname = encryptPassword(passname)
+            val encryptedPassword = encryptor.encryptPassword(password, username)
+            val encryptedPassname = encryptor.encryptPassword(passname, username)
             val passEntity = PasswordEntity(null, hashedUsername, encryptedPassname, encryptedPassword)
             passDao.insert(passEntity)
         }
@@ -29,7 +24,7 @@ class PasswordRepository (private val passDao: PasswordDao) {
     suspend fun getPasswordByName(username: String, passname: String): PasswordEntity? {
         return withContext(Dispatchers.IO) {
             val hashedUsername = HashUtils.sha256Hash(username)
-            val encryptedPassname = encryptPassword(passname)
+            val encryptedPassname = encryptor.encryptPassword(passname, username)
             return@withContext passDao.getPasswordByName(hashedUsername, encryptedPassname)
         }
     }
@@ -39,8 +34,5 @@ class PasswordRepository (private val passDao: PasswordDao) {
             val hashedUsername = HashUtils.sha256Hash(username)
             return@withContext passDao.getAllPasswords(hashedUsername)
         }
-    }
-    private fun encryptPassword(password: String): String {
-        return encryptor.encryptPassword(password)
     }
 }
