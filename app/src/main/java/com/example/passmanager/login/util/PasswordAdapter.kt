@@ -1,18 +1,25 @@
 package com.example.passmanager.login.util
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.passmanager.R
 import com.example.passmanager.login.model.entities.PasswordEntity
 
-
-class PasswordAdapter(private val passwords: List<PasswordEntity>) :
+class PasswordAdapter(private val passwords: MutableList<PasswordEntity>) :
     RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
 
-    private val passwordsList: MutableList<PasswordEntity> = passwords.toMutableList()
+    private val passwordsList: MutableList<PasswordEntity> = mutableListOf()
+
+    init {
+        passwordsList.addAll(passwords)
+    }
     fun getPasswordsList(): List<PasswordEntity> {
         return passwordsList
     }
@@ -35,6 +42,35 @@ class PasswordAdapter(private val passwords: List<PasswordEntity>) :
         passwordsList.clear()
         passwordsList.addAll(newPasswords)
         notifyDataSetChanged()
+    }
+
+    fun removePassword(position: Int) {
+        passwordsList.removeAt(position)
+        notifyItemRemoved(position)
+        // код для видалення з бази даних
+    }
+
+    fun showDeleteConfirmationDialog(context: Context, position: Int) {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_confirm_delete, null)
+        val yesButton = dialogView.findViewById<Button>(R.id.button_yes)
+        val noButton = dialogView.findViewById<Button>(R.id.button_no)
+
+        val alertDialog = AlertDialog.Builder(context)
+            .setView(dialogView)
+            .setCancelable(false)
+            .create()
+
+        yesButton.setOnClickListener {
+            removePassword(position)
+            alertDialog.dismiss()
+        }
+
+        noButton.setOnClickListener {
+            notifyItemChanged(position)
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 
     class PasswordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
