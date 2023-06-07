@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.passmanager.R
 import com.example.passmanager.login.screens.VM.LoginViewModel
+import com.example.passmanager.login.util.SessionManagerUtil
+import java.util.*
 
 class SignupActivity : AppCompatActivity() {
 
@@ -44,17 +46,7 @@ class SignupActivity : AppCompatActivity() {
                     loginViewModel.getUserByUsername(user)
                     loginViewModel.userByUsernameResult.observe(this@SignupActivity) { loggedInUser ->
                         if (loggedInUser == null) {
-                            loginViewModel.insertUser(user, pass)
-                            Toast.makeText(
-                                this@SignupActivity,
-                                "Registered successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            val intent = Intent(applicationContext, MainActivity::class.java).apply {
-                                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                            }
-                            intent.putExtra("name", user)
-                            startActivity(intent)
+                            performUserSignup(user, pass)
                         } else {
                             Toast.makeText(
                                 this@SignupActivity,
@@ -72,9 +64,28 @@ class SignupActivity : AppCompatActivity() {
                 }
             }
         }
+
         back.setOnClickListener {
             val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun performUserSignup(user: String, pass: String) {
+        val sessionToken = UUID.randomUUID().toString()
+        SessionManagerUtil.storeUserToken(applicationContext, sessionToken)
+        val expiresIn = 3600
+        SessionManagerUtil.startUserSession(applicationContext, expiresIn)
+        loginViewModel.insertUser(user, pass)
+        Toast.makeText(
+            this@SignupActivity,
+            "Registered successfully",
+            Toast.LENGTH_SHORT
+        ).show()
+        val intent = Intent(applicationContext, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        intent.putExtra("name", user)
+        startActivity(intent)
     }
 }
