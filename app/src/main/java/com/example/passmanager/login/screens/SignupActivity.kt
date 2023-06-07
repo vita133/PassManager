@@ -53,6 +53,7 @@ class SignupActivity : AppCompatActivity() {
                                 "User already exists! Please sign in",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            loginViewModel.setNull()
                         }
                     }
                 } else {

@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.passmanager.R
 import com.example.passmanager.login.model.entities.PasswordEntity
 
-class PasswordAdapter(private val passwords: MutableList<PasswordEntity>) :
+
+class PasswordAdapter(private val passwords: MutableList<PasswordEntity>, private val hashKey: String) :
     RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
-
+    private val encryptor: PasswordEncryptor = PasswordEncryptor()
     private val passwordsList: MutableList<PasswordEntity> = mutableListOf()
-
+    //private val passwordsList: MutableList<PasswordEntity> = passwords.toMutableList()
     init {
         passwordsList.addAll(passwords)
     }
@@ -37,10 +38,17 @@ class PasswordAdapter(private val passwords: MutableList<PasswordEntity>) :
         val password = passwordsList[position]
         holder.bind(password)
     }
-
+    private fun decryptPassword(encryptedPassword: String): String {
+        return encryptor.decryptPassword(encryptedPassword, hashKey)
+    }
     fun updatePasswords(newPasswords: List<PasswordEntity>) {
         passwordsList.clear()
-        passwordsList.addAll(newPasswords)
+        for (password in newPasswords) {
+            val decryptedPassName = decryptPassword(password.website)
+            val decryptedPassword = decryptPassword(password.password)
+            val decryptedEntity = password.copy(website = decryptedPassName, password = decryptedPassword)
+            passwordsList.add(decryptedEntity)
+        }
         notifyDataSetChanged()
     }
 

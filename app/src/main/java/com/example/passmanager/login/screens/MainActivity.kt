@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val name = intent.getStringExtra("name").toString()
 
         val recyclerView: RecyclerView = findViewById(R.id.passwdRecyclerView)
-        val adapter = PasswordAdapter(mutableListOf<PasswordEntity>())
+        val adapter = PasswordAdapter(mutableListOf<PasswordEntity>(), name)
         val itemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
         itemTouchHelper.attachToRecyclerView(recyclerView)

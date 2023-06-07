@@ -25,14 +25,15 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
+        val username = intent.getStringExtra("name").toString()
+        val textPassword = intent.getStringExtra("textPassword")
+
         passwordViewModel = ViewModelProvider(this)[PasswordViewModel::class.java]
         passwordEditText = findViewById(R.id.editText_password)
         buttonSave = findViewById(R.id.button_save)
         buttonDelete = findViewById(R.id.button_delete)
         passwordName = findViewById(R.id.editText_passName)
 
-        val username = intent.getStringExtra("name").toString()
-        val textPassword = intent.getStringExtra("textPassword")
         passwordEditText.setText(textPassword)
 
         setupSaveButton(username)
