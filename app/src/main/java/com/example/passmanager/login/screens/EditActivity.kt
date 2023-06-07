@@ -25,14 +25,15 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
+        val username = intent.getStringExtra("name").toString()
+        val textPassword = intent.getStringExtra("textPassword")
+
         passwordViewModel = ViewModelProvider(this)[PasswordViewModel::class.java]
         passwordEditText = findViewById(R.id.editText_password)
         buttonSave = findViewById(R.id.button_save)
         buttonDelete = findViewById(R.id.button_delete)
         passwordName = findViewById(R.id.editText_passName)
 
-        val username = intent.getStringExtra("name").toString()
-        val textPassword = intent.getStringExtra("textPassword")
         passwordEditText.setText(textPassword)
 
         setupSaveButton(username)
@@ -49,6 +50,7 @@ class EditActivity : AppCompatActivity() {
                 if(passName.isEmpty() || pass.isEmpty()) {
                     Toast.makeText(this@EditActivity, "Please enter all the fields", Toast.LENGTH_SHORT).show()
                 } else {
+                    passwordViewModel.setUserName(username)
                     passwordViewModel.getPasswordByName(username, passName)
                     passwordViewModel.passwordByNameResult.observe(this@EditActivity){existPass ->
                         if(existPass == null) {

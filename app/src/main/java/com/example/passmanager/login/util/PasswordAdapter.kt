@@ -9,9 +9,10 @@ import com.example.passmanager.R
 import com.example.passmanager.login.model.entities.PasswordEntity
 
 
-class PasswordAdapter(private val passwords: List<PasswordEntity>) :
-    RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
 
+class PasswordAdapter(private val passwords: List<PasswordEntity>, private val hashKey: String) :
+    RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
+    private val encryptor: PasswordEncryptor = PasswordEncryptor(hashKey)
     private val passwordsList: MutableList<PasswordEntity> = passwords.toMutableList()
     fun getPasswordsList(): List<PasswordEntity> {
         return passwordsList
@@ -30,10 +31,17 @@ class PasswordAdapter(private val passwords: List<PasswordEntity>) :
         val password = passwordsList[position]
         holder.bind(password)
     }
-
+    private fun decryptPassword(encryptedPassword: String): String {
+        return encryptor.decryptPassword(encryptedPassword)
+    }
     fun updatePasswords(newPasswords: List<PasswordEntity>) {
         passwordsList.clear()
-        passwordsList.addAll(newPasswords)
+        for (password in newPasswords) {
+            val decryptedPassName = decryptPassword(password.website)
+            val decryptedPassword = decryptPassword(password.password)
+            val decryptedEntity = password.copy(website = decryptedPassName, password = decryptedPassword)
+            passwordsList.add(decryptedEntity)
+        }
         notifyDataSetChanged()
     }
 

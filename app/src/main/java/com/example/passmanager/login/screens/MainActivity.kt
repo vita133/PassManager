@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val adapter = PasswordAdapter(emptyList())
+        val adapter = PasswordAdapter(emptyList(), name)
         recyclerView.adapter = adapter
 
 
