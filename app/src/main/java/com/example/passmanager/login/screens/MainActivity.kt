@@ -67,16 +67,10 @@ class MainActivity : AppCompatActivity() {
             SessionManagerUtil.endUserSession(applicationContext)
             val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finishAffinity()
         }
 
-    }
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        val isSessionActive = SessionManagerUtil.isSessionActive(Date(), applicationContext)
-        if (isSessionActive) {
-            Toast.makeText(this, "Back button disabled", Toast.LENGTH_SHORT).show()
-        } else {
-            super.onBackPressed()
-        }
     }
 }
