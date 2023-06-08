@@ -3,13 +3,13 @@ package com.example.passmanager.login.screens
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.passmanager.R
 import com.example.passmanager.login.screens.VM.PasswordViewModel
 import com.example.passmanager.login.util.PasswordAdapter
-import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.passmanager.login.model.entities.PasswordEntity
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        passwordViewModel = ViewModelProvider(this@MainActivity)[PasswordViewModel::class.java]
         addPass = findViewById(R.id.flActionButton_addPasswd)
         toolbar = findViewById(R.id.toolbar_main)
 
@@ -34,21 +34,19 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.passwdRecyclerView)
         val adapter = PasswordAdapter(mutableListOf<PasswordEntity>(), name)
-        val itemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
-        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
+        val itemDecoration = DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL)
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter, passwordViewModel))
         itemTouchHelper.attachToRecyclerView(recyclerView)
         recyclerView.addItemDecoration(itemDecoration)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
-        passwordViewModel = ViewModelProvider(this)[PasswordViewModel::class.java]
+
         passwordViewModel.getAllPasswords(name)
         passwordViewModel.allPasswordsResult.observe(this@MainActivity) { passwords ->
             adapter.updatePasswords(passwords)
         }
-
-
 
         addPass.setOnClickListener {
             val isSessionActive = SessionManagerUtil.isSessionActive(Date(), applicationContext)
@@ -71,6 +69,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finishAffinity()
         }
-
+    }
+    override fun onBackPressed() {
+        Log.INFO
     }
 }

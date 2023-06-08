@@ -37,6 +37,13 @@ class PasswordViewModel (application: Application) : AndroidViewModel(applicatio
             _passwordByNameResult.postValue(result)
         }
     }
+    fun deletePasswordByName(username: String, passname: String) {
+        viewModelScope.launch {
+            passRepository.deletePasswordByName(username, passname)
+        }
+    }
+
+
 
     fun getAllPasswords(username: String) {
         viewModelScope.launch {

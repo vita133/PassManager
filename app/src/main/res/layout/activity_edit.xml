@@ -75,7 +75,7 @@
         app:layout_constraintStart_toEndOf="@+id/button_delete"
         app:layout_constraintTop_toBottomOf="@+id/editText_password" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/button_delete"
         style="@style/ButtonStyle"
         android:layout_width="129dp"

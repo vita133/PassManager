@@ -15,4 +15,7 @@ interface PasswordDao {
 
     @Query("SELECT * FROM passwords WHERE UserName = :username AND WebSite = :sitename")
     fun getPasswordByName(username: String, sitename: String): PasswordEntity?
+
+    @Query(" DELETE FROM passwords WHERE UserName = :username AND WebSite = :sitename")
+    fun deletePasswordByName(username: String, sitename: String)
 }

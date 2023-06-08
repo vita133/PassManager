@@ -29,6 +29,14 @@ class PasswordRepository (private val passDao: PasswordDao) {
         }
     }
 
+    suspend fun deletePasswordByName(username: String, passname: String) {
+        return withContext(Dispatchers.IO) {
+           // val hashedUsername = HashUtils.sha256Hash(username)
+           // val encryptedPassname = encryptor.encryptPassword(passname, username)
+            passDao.deletePasswordByName(username, passname)
+        }
+    }
+
     suspend fun getAllPasswords(username: String): List<PasswordEntity> {
         return withContext(Dispatchers.IO) {
             val hashedUsername = HashUtils.sha256Hash(username)

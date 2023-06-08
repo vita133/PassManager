@@ -7,22 +7,27 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.passmanager.R
 import com.example.passmanager.login.model.entities.PasswordEntity
+import com.example.passmanager.login.screens.VM.PasswordViewModel
 
 
-class PasswordAdapter(private val passwords: MutableList<PasswordEntity>, private val hashKey: String) :
-    RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
+class PasswordAdapter(
+    private val passwords: MutableList<PasswordEntity>,
+    private val hashKey: String,
+    ): RecyclerView.Adapter<PasswordAdapter.PasswordViewHolder>() {
     private val encryptor: PasswordEncryptor = PasswordEncryptor()
     private val passwordsList: MutableList<PasswordEntity> = mutableListOf()
-    //private val passwordsList: MutableList<PasswordEntity> = passwords.toMutableList()
+    var deletePass = false
     init {
         passwordsList.addAll(passwords)
     }
     fun getPasswordsList(): List<PasswordEntity> {
         return passwordsList
+    }
+    fun getPassword(position: Int): PasswordEntity {
+        return passwordsList[position]
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PasswordViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -55,10 +60,9 @@ class PasswordAdapter(private val passwords: MutableList<PasswordEntity>, privat
     fun removePassword(position: Int) {
         passwordsList.removeAt(position)
         notifyItemRemoved(position)
-        // код для видалення з бази даних
     }
 
-    fun showDeleteConfirmationDialog(context: Context, position: Int) {
+    fun showDeleteConfirmationDialog(context: Context, position: Int, passwordViewModel: PasswordViewModel) {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_confirm_delete, null)
         val yesButton = dialogView.findViewById<Button>(R.id.button_yes)
         val noButton = dialogView.findViewById<Button>(R.id.button_no)
@@ -69,11 +73,14 @@ class PasswordAdapter(private val passwords: MutableList<PasswordEntity>, privat
             .create()
 
         yesButton.setOnClickListener {
+            deletePass = true
             removePassword(position)
+            notifyItemChanged(position)
             alertDialog.dismiss()
         }
 
         noButton.setOnClickListener {
+            deletePass = false
             notifyItemChanged(position)
             alertDialog.dismiss()
         }

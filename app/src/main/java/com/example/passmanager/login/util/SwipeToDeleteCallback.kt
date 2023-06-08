@@ -1,12 +1,18 @@
 package com.example.passmanager.login.util
+
+
 import android.graphics.Canvas
 import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.passmanager.R
+import com.example.passmanager.login.screens.VM.PasswordViewModel
 
-class SwipeToDeleteCallback(private val adapter: PasswordAdapter) : ItemTouchHelper.Callback() {
+class SwipeToDeleteCallback(
+    private val adapter: PasswordAdapter,
+    private val passwordViewModel: PasswordViewModel
+) : ItemTouchHelper.Callback() {
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,
@@ -53,6 +59,10 @@ class SwipeToDeleteCallback(private val adapter: PasswordAdapter) : ItemTouchHel
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.adapterPosition
-        adapter.showDeleteConfirmationDialog(viewHolder.itemView.context, position)
+        adapter.showDeleteConfirmationDialog(viewHolder.itemView.context, position, passwordViewModel)
+        if(adapter.deletePass){
+            val password = adapter.getPassword(position)
+            passwordViewModel.deletePasswordByName(password.userName, password.website)
+        }
     }
 }
