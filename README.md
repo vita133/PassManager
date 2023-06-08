@@ -30,6 +30,14 @@ This project includes tests to ensure the correctness of the application. To run
 5. Right-click on the test folder and choose the "Run tests" option or the appropriate option depending on your version of Android Studio.
 6. The tests will run, and the results will be displayed in the console or a dedicated panel in Android Studio.
 
-## [Design document](https://docs.google.com/document/d/1XEGaNqPQXwrxoQCH9QCrQosNg_byAlfBoxyzJ9582-c/edit?usp=sharing)
+##  _ScreenShots_  :camera:
 
-[image1](images/photo_2023-06-08_10-19-36.jpg)
+|  _Login Screen_  |      _Signup Screen_      |    _Main Screen_    |      _Generate Screen(secure)_    |
+|----------|:-------------:|:-------------:|:-------------:|
+| <img src=images/photo_2023-06-08_10-19-36.jpg width="200" height="435"> |  <img src=images/photo_2023-06-08_10-19-38.jpg width="200" height="435"> | <img src=images/photo_2023-06-08_10-19-50.jpg width="200" height="435"> | <img src=images/photo_2023-06-08_10-19-42.jpg width="200" height="435"> | 
+
+|   _Generate Screen(insecure)_  |      _Edit Screen_      |    _Deletion_    |      _Сonfirmation dialog_    |
+|----------|:-------------:|:-------------:|:-------------:|
+| <img src=images/photo_2023-06-08_10-19-45.jpg width="200" height="435"> |  <img src=images/photo_2023-06-08_10-19-49.jpg width="200" height="435"> | <img src=images/photo_2023-06-08_10-19-52.jpg width="200" height="435"> | <img src=images/photo_2023-06-08_10-19-56.jpg width="200" height="435"> |
+
+## [Design document](https://docs.google.com/document/d/1XEGaNqPQXwrxoQCH9QCrQosNg_byAlfBoxyzJ9582-c/edit?usp=sharing)
