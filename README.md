@@ -32,3 +32,4 @@ This project includes tests to ensure the correctness of the application. To run
 
 ## [Design document](https://docs.google.com/document/d/1XEGaNqPQXwrxoQCH9QCrQosNg_byAlfBoxyzJ9582-c/edit?usp=sharing)
 
+[image1](images/photo_2023-06-08_10-19-36.jpg)
