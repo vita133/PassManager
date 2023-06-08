@@ -18,7 +18,7 @@ class EditActivity : AppCompatActivity() {
     private lateinit var passwordViewModel: PasswordViewModel
     private lateinit var passwordEditText: EditText
     private lateinit var buttonSave: Button
-    private lateinit var buttonDelete: Button
+    private lateinit var buttonCancel: Button
     private lateinit var passwordName: EditText
     private lateinit var back: TextView
 
@@ -32,7 +32,7 @@ class EditActivity : AppCompatActivity() {
         passwordViewModel = ViewModelProvider(this)[PasswordViewModel::class.java]
         passwordEditText = findViewById(R.id.editText_password)
         buttonSave = findViewById(R.id.button_save)
-        buttonDelete = findViewById(R.id.button_delete)
+        buttonCancel = findViewById(R.id.button_cancel)
         passwordName = findViewById(R.id.editText_passName)
         back = findViewById(R.id.textView_back)
 
@@ -41,6 +41,7 @@ class EditActivity : AppCompatActivity() {
         setupSaveButton(username)
         setupDeleteButton()
         setupBackButton(username)
+        setupCancelButton(username)
     }
 
     private fun setupSaveButton(username:String ) {
@@ -86,6 +87,13 @@ class EditActivity : AppCompatActivity() {
     }
     private fun setupBackButton(name : String) {
         back.setOnClickListener {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra("name", name)
+            startActivity(intent)
+        }
+    }
+    private fun setupCancelButton(name : String) {
+        buttonCancel.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             intent.putExtra("name", name)
             startActivity(intent)
