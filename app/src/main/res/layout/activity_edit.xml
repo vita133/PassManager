@@ -72,17 +72,17 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="157dp"
         android:text="Save"
-        app:layout_constraintStart_toEndOf="@+id/button_delete"
+        app:layout_constraintStart_toEndOf="@+id/button_cancel"
         app:layout_constraintTop_toBottomOf="@+id/editText_password" />
 
     <Button
-        android:id="@+id/button_delete"
+        android:id="@+id/button_cancel"
         style="@style/ButtonStyle"
         android:layout_width="129dp"
         android:layout_height="53dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="157dp"
-        android:text="Delete"
+        android:text="Cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_password" />
 
